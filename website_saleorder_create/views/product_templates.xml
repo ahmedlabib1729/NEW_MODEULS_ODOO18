@@ -1,0 +1,104 @@
+<odoo>
+   <template id="template_homepage" name="Homepage with Products">
+    <t t-call="website.layout">
+        <div class="container mt-5">
+            <!-- Header Section -->
+            <div class="text-center mb-4">
+                <h1 class="display-4 text-primary">اختيار المنتجات</h1>
+                <p class="lead text-secondary">املأ بياناتك واختر المنتجات التي ترغب في طلبها بسهولة.</p>
+            </div>
+            <!-- Customer Details Section -->
+            <form id="order-form" action="/order/submit" method="POST" class="shadow p-4 rounded bg-light">
+                <h3 class="text-primary mb-4">بيانات العميل</h3>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="customer_name" class="form-label">الاسم الكامل (مطلوب):</label>
+                        <input type="text" id="customer_name" name="customer_name" class="form-control" placeholder="ادخل اسمك الكامل" />
+                    </div>
+                    <div class="col-md-6">
+                        <label for="customer_email" class="form-label">البريد الإلكتروني:</label>
+                        <input type="email" id="customer_email" name="customer_email" class="form-control" placeholder="ادخل بريدك الإلكتروني"/>
+                    </div>
+                </div>
+                <div class="row mb-4">
+                    <div class="col-md-6">
+                        <label for="customer_phone" class="form-label">رقم الهاتف (مطلوب):</label>
+                        <input type="text" id="customer_phone" name="customer_phone" class="form-control" placeholder="ادخل رقم هاتفك" />
+                    </div>
+                    <div class="col-md-6">
+                        <label for="customer_address" class="form-label">العنوان:</label>
+                        <input type="text" id="customer_address" name="customer_address" class="form-control" placeholder="ادخل عنوانك"/>
+                    </div>
+                </div>
+
+                <!-- Search and Filter Section -->
+                <h3 class="text-primary mb-4">بحث وتصفية المنتجات</h3>
+                <div class="row mb-4">
+                    <div class="col-md-6">
+                        <input type="text" id="search-query" name="search" class="form-control" placeholder="ابحث عن منتج..."/>
+                    </div>
+                    <div class="col-md-4">
+                        <select id="category-filter" name="category_id" class="form-select">
+                            <option value="">اختر الفئة</option>
+                            <t t-foreach="categories" t-as="category">
+                                <option t-att-value="category.id">
+                                    <t t-esc="category.name"/>
+                                </option>
+                            </t>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <button type="button" id="search-button" class="btn btn-primary w-100">بحث</button>
+                    </div>
+                </div>
+
+                <!-- Products Section -->
+                <h3 class="text-primary mt-4 mb-3">المنتجات المتاحة</h3>
+            <table class="table table-bordered">
+                <thead class="table-dark">
+                    <tr>
+                        <th>اختيار</th>
+                        <th>الصورة</th>
+                        <th>اسم المنتج</th>
+                        <th>الكمية المطلوبة</th>
+                    </tr>
+                </thead>
+                <tbody id="product-list">
+                    <t t-foreach="products" t-as="product">
+                        <tr>
+                            <!-- اختيار المنتج -->
+                            <td class="text-center align-middle">
+                                <input type="checkbox" name="product_id" t-att-value="product.id" class="form-check-input"/>
+                            </td>
+
+                            <!-- صورة المنتج -->
+                            <td class="text-center align-middle">
+                                <img t-att-src="'/web/image/product.template/%d/image_128' % product.id"
+                                     class="img-thumbnail"
+                                     alt="Product Image"
+                                     style="width: 80px; height: 80px;"/>
+                            </td>
+
+                            <!-- اسم المنتج -->
+                            <td class="align-middle">
+                                <t t-esc="product.name"/>
+                            </td>
+
+                            <!-- إدخال الكمية -->
+                            <td class="text-center align-middle">
+                                <input type="number" name="quantity" class="form-control" placeholder="0" min="0"/>
+                            </td>
+                        </tr>
+                    </t>
+                </tbody>
+            </table>
+
+                <!-- Submit Button -->
+                <div class="text-center mt-4">
+                    <button type="submit" class="btn btn-success btn-lg">إرسال الطلب</button>
+                </div>
+            </form>
+        </div>
+    </t>
+   </template>
+</odoo>

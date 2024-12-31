@@ -1,0 +1,17 @@
+<odoo>
+    <data>
+        <template id="template_success_page" name="Order Success Page">
+            <t t-call="website.layout">
+                <div class="container mt-5 text-center">
+                    <div class="alert alert-success shadow p-4">
+                        <h1 class="display-5 text-success">تم إنشاء الطلب بنجاح!</h1>
+                        <p class="lead">لقد تم تقديم طلبك بنجاح.</p>
+                        <p><strong>رقم الطلب:</strong> <t t-esc="sale_order.name"/></p>
+                        <a href="/" class="btn btn-primary btn-lg mt-3">العودة إلى الصفحة الرئيسية</a>
+                    </div>
+                </div>
+            </t>
+        </template>
+    </data>
+</odoo>
+

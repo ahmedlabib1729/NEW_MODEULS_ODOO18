@@ -1,0 +1,10 @@
+<odoo>
+  <data>
+
+<template id="template_error_page">
+    <h1>Error Occurred</h1>
+    <p>There was an issue with your order: <t t-esc="error"/></p>
+</template>
+
+  </data>
+</odoo>
