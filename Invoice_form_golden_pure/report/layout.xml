@@ -7,7 +7,7 @@
 
 
                                <div class="col-3">
-                                <img src="/Invoice_form_golden_pure/static/src/img/WhatsApp Image 2024-12-22 at 21.43.16_bbff031a.png" alt="Logo" style="max-width: 150px; max-height: 200px;"/>
+                                <img src="/Invoice_form_golden_pure/static/src/img/WhatsApp Image 2024-12-22 at 21.43.16_bbff031a.png" alt="Logo" style="max-width: 60px; max-height: 100px;"/>
                                </div>
 
                                  <div class="col-2">
@@ -34,16 +34,7 @@
         <div t-attf-class="footer o_standard_footer o_company_#{company.id}_layout">
             <div class="text-center" style="border-top: 1px solid black;">
 
-                     <div class="row">
-                <div class="col-12">
-                    <p>
-                        <span style="margin-right: 30px;">info@goldenpure.ae</span> |
-                        <span style="margin-left: 30px; margin-right: 30px;">Tel: +971 48850038</span> |
-                        <span style="margin-left: 30px;">Mob: +971 505090058</span>
-                    </p>
-                </div>
 
-                     </div>
                 <t t-if="report_type == 'pdf'" class="text-muted">
 
                 </t>
