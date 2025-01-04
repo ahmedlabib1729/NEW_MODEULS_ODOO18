@@ -1,0 +1,73 @@
+<odoo>
+    <template id="custom_external_layout">
+        <!-- نسخ القالب الأصلي -->
+                 <div t-attf-class="header o_company_#{company.id}_layout" t-att-style="report_header_style">
+                           <div class="o_clean_header">
+                               <div class="row">
+
+
+                               <div class="col-3">
+                                <img src="/Invoice_form_golden_pure/static/src/img/SAMAD.png" alt="Logo" style="max-width: 150px; max-height: 200px;"/>
+                               </div>
+
+                                 <div class="col-2">
+
+                                   </div>
+                                   <div class="col-7" style="padding-top: 40px;">
+
+                                <h6 style="text-align: right; vertical-align: baseline; max-height: 50px;"> <strong>GOLDEN PURE FOODSTUFF TRADING CO.L.L.C </strong>  </h6>
+
+                                       <div class="row">
+                                    <div class="col-3">
+                                   </div>
+                                    <div class="col-9" >
+
+                                         <h6 style="text-align: RIGHT; vertical-align: baseline; max-height: 50px;"><strong>DUBAI - AL FAHIDI - DM BUILDING-OFFICE 43 </strong>  </h6>
+                            </div>
+
+                               </div>
+
+
+                                       <div class="row">
+                                    <div class="col-3">
+                                   </div>
+                                    <div class="col-7" style="padding-top: 10px;">
+
+                                        <h6 style="text-align: right; vertical-align: baseline; max-height: 50px; "><strong>TRN : 104208389700003</strong>   </h6>
+                            </div>
+
+                               </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+         </div>
+
+
+        <div t-attf-class="article o_report_layout_standard o_company_#{company.id}_layout {{  'o_report_layout_background' if company.layout_background in ['Geometric', 'Custom']  else  '' }}" t-attf-style="background-image: url({{ 'data:image/png;base64,%s' % company.layout_background_image.decode('utf-8') if company.layout_background_image and company.layout_background == 'Custom' else '/base/static/img/bg_background_template.jpg' if company.layout_background == 'Geometric' else ''}});" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id">
+            <div t-call="web.address_layout"/>
+            <div t-raw="0"/>
+        </div>
+
+        <div t-attf-class="footer o_standard_footer o_company_#{company.id}_layout">
+            <div class="text-center" style="border-top: 1px solid black;">
+
+                     <div class="row">
+                <div class="col-12">
+                    <p>
+                        <span style="margin-right: 30px;">info@goldenpure.ae</span> |
+                        <span style="margin-left: 30px; margin-right: 30px;">Tel: +971 48850038</span> |
+                        <span style="margin-left: 30px;">Mob: +971 505090058</span>
+                    </p>
+                </div>
+
+                     </div>
+                <t t-if="report_type == 'pdf'" class="text-muted">
+
+                </t>
+            </div>
+        </div>
+    </template>
+</odoo>
