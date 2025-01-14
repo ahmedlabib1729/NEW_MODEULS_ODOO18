@@ -1,0 +1,188 @@
+<odoo>
+   <template id="tax_invoice">
+       <t t-call="web.html_container">
+
+<t t-foreach="docs" t-as="o">
+          <t t-call="Invoice_form_Samad.custom_external_layout">
+
+             <t t-set="company" t-value="o.company_id"/>
+
+
+               <div class="page">
+                    <hr style="border: 1px solid #000000;"/>
+                      <h2 style="text-align:center; color: #000000; " width="10%"></h2>
+
+
+
+                   <div class="row" style="height: 30px;">
+
+                       <div class="col-2">
+                               <strong>Invoice NO. : </strong>
+                       </div>
+                       <div class="col-3">
+
+                               <span t-field="o.name"/>
+                       </div>
+                       <div class="col-1">
+
+                       </div>
+                       <div class="col-1">
+
+                       </div>
+                       <div class="col-2" style="text-align: right;">
+                               <strong style="text-align: right;">Date :</strong>
+                       </div>
+                       <div class="col-2" style="text-align: right;">
+
+
+                            <span t-field="o.invoice_date"/>
+                       </div>
+                   </div>
+
+
+
+                   <div class="row" style="height: 30px;">
+
+                       <div class="col-2  ">
+                               <strong>Customer :</strong>
+                       </div>
+                       <div class="col-5" >
+
+                               <span t-field="o.partner_id"/>
+                       </div>
+
+                       <div class="col-2 " style="text-align: right; ">
+                               <strong>Payment Type :</strong>
+                       </div>
+                       <div class="col-2" style="text-align: right;">
+
+                                <span t-field="o.x_studio_selection_field_hc_1ifsneh1r"/>
+                       </div>
+                   </div>
+
+
+                   <table class="table table-bordered" width="100%" style="border-collapse: collapse; border: 2px solid black;">
+                       <thead style="border: 2px solid black; background-color: #bbd3c5;">
+                           <tr>
+                               <th style="text-align:center; font-size: 14px; border: 1px solid;">Seq.</th>
+                               <th style="text-align:center; font-size: 14px; border: 1px solid;">Item</th>
+                               <th style="text-align:center; font-size: 14px; border: 1px solid;">Description</th>
+                               <th style="text-align:center; font-size: 14px; border: 1px solid;">QTY</th>
+                               <th style="text-align:center; font-size: 14px; border: 1px solid;">UNIT</th>
+                               <th style="text-align:center; font-size: 14px; border: 1px solid;">Price</th>
+                               <th style="text-align:center; font-size: 14px; border: 1px solid;">VAT</th>
+                               <th style="text-align:center; font-size: 14px; border: 1px solid;">Amount</th>
+
+                           </tr>
+                       </thead>
+
+                       <tbody style="border: 1px solid black;" >
+
+                           <tr t-set="sr_no" t-value="0"/>
+                                <tr t-foreach="o.invoice_line_ids" t-as="line">
+                                    <tr t-set="sr_no" t-value="sr_no + 1"/>
+                                    <td style="text-align:center;">
+                                        <t t-esc="sr_no"/>
+                                    </td>
+
+                               <td style="text-align:left; font-size: 10px;">
+                                   <span t-esc="line.product_id.name"/>
+                               </td>
+                                    <td style="text-align:left; font-size: 10px;">
+                                   <span t-esc="line.x_studio_description"/>
+                               </td>
+                               <td style="text-align:center; font-size: 10px;">
+                                   <span t-esc="int(line.quantity)"/>
+                               </td>
+                               <td style="text-align:center; font-size: 10px;">
+                                   <span t-esc="line.product_uom_id.name"/>
+                               </td>
+                               <td style="text-align:center; font-size: 10px;">
+                                   <span t-esc="line.price_unit"/>
+                               </td>
+                               <td style="text-align:center; font-size: 10px;">
+                                   <span t-esc="line.l10n_ae_vat_amount"/>
+                               </td>
+                               <td style="text-align:center; font-size: 10px;">
+                                   <span t-esc="line.price_total"/>
+                               </td>
+
+                           </tr>
+                       </tbody>
+                   </table>
+
+                   <div class="row" style="height: 30px;">
+
+                       <div class="col-2">
+
+                       </div>
+                       <div class="col-3">
+
+                       </div>
+                       <div class="col-1">
+
+                       </div>
+                       <div class="col-1">
+
+                       </div>
+                       <div class="col-1">
+
+                       </div>
+                       <div class="col-2" style="text-align: right; ">
+                               <strong style="text-align: right;">SubTotal  </strong>
+                       </div>
+                       <div class="col-2" style="text-align: right;">
+                                 <span t-field="o.amount_untaxed"/>
+                       </div>
+                   </div>
+                   <div class="row" style="height: 30px;">
+
+                       <div class="col-2">
+
+                       </div>
+                       <div class="col-3">
+
+                       </div>
+                       <div class="col-1">
+
+                       </div>
+                       <div class="col-1">
+
+                       </div>
+                       <div class="col-1">
+
+                       </div>
+                       <div class="col-2" style="text-align: right;">
+                               <strong style="text-align: right;">VAT  </strong>
+                       </div>
+                       <div class="col-2" style="text-align: right;">
+                                 <span t-field="o.amount_tax"/>
+                       </div>
+                   </div>
+
+                   <div class="row">
+
+                       <div class="col-7">
+
+                       </div>
+
+                       <div class="col-1">
+
+                       </div>
+
+                       <div class="col-2" style="text-align: right;">
+                            <strong style="text-align: right; font-weight: bolder; font-size: 20px;">     TOTAL     </strong>
+                       </div>
+                       <div class="col-2" style="text-align: right;">
+                                 <span t-field="o.amount_total"/>
+                       </div>
+                   </div>
+
+               </div>
+
+           </t>
+       </t>
+</t>
+
+   </template>
+</odoo>
