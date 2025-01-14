@@ -12,14 +12,16 @@
                     <hr style="border: 1px solid #000000;"/>
                       <h2 style="text-align:center; color: #000000; " width="10%"></h2>
 
+
+
                    <div class="row" style="height: 30px;">
 
                        <div class="col-2">
-                               <strong>Date : </strong>
+                               <strong>Invoice NO. : </strong>
                        </div>
                        <div class="col-3">
 
-                                <span t-field="o.invoice_date"/>
+                               <span t-field="o.name"/>
                        </div>
                        <div class="col-1">
 
@@ -28,11 +30,12 @@
 
                        </div>
                        <div class="col-2" style="text-align: right;">
-                               <strong style="text-align: right;">Invoice NO. : </strong>
+                               <strong style="text-align: right;">Date :</strong>
                        </div>
-                       <div class="col-3" style="text-align: right;">
+                       <div class="col-2" style="text-align: right;">
 
-                                 <span t-field="o.name"/>
+
+                            <span t-field="o.invoice_date"/>
                        </div>
                    </div>
 
@@ -63,9 +66,11 @@
                            <tr>
                                <th style="text-align:center; font-size: 14px; border: 1px solid;">Seq.</th>
                                <th style="text-align:center; font-size: 14px; border: 1px solid;">Item</th>
+                               <th style="text-align:center; font-size: 14px; border: 1px solid;">Description</th>
                                <th style="text-align:center; font-size: 14px; border: 1px solid;">QTY</th>
-                               <th style="text-align:center; font-size: 14px; border: 1px solid;">Unit Price</th>
-                               <th style="text-align:center; font-size: 14px; border: 1px solid;">VAT Amount</th>
+                               <th style="text-align:center; font-size: 14px; border: 1px solid;">UNIT</th>
+                               <th style="text-align:center; font-size: 14px; border: 1px solid;">Price</th>
+                               <th style="text-align:center; font-size: 14px; border: 1px solid;">VAT</th>
                                <th style="text-align:center; font-size: 14px; border: 1px solid;">Amount</th>
 
                            </tr>
@@ -80,19 +85,25 @@
                                         <t t-esc="sr_no"/>
                                     </td>
 
-                               <td style="text-align:left; font-size: 12px;">
+                               <td style="text-align:left; font-size: 10px;">
                                    <span t-esc="line.product_id.name"/>
                                </td>
-                               <td style="text-align:center; font-size: 12px;">
+                                    <td style="text-align:left; font-size: 10px;">
+                                   <span t-esc="line.x_studio_description"/>
+                               </td>
+                               <td style="text-align:center; font-size: 10px;">
                                    <span t-esc="int(line.quantity)"/>
                                </td>
-                               <td style="text-align:center; font-size: 12px;">
+                               <td style="text-align:center; font-size: 10px;">
+                                   <span t-esc="line.product_uom_id.name"/>
+                               </td>
+                               <td style="text-align:center; font-size: 10px;">
                                    <span t-esc="line.price_unit"/>
                                </td>
-                               <td style="text-align:center; font-size: 12px;">
+                               <td style="text-align:center; font-size: 10px;">
                                    <span t-esc="line.l10n_ae_vat_amount"/>
                                </td>
-                               <td style="text-align:center; font-size: 12px;">
+                               <td style="text-align:center; font-size: 10px;">
                                    <span t-esc="line.price_total"/>
                                </td>
 
