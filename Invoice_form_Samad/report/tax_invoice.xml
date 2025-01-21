@@ -92,13 +92,13 @@
                                    <span t-esc="line.x_studio_description"/>
                                </td>
                                <td style="text-align:center; font-size: 10px;">
-                                   <span t-esc="int(line.quantity)"/>
+                                    <span t-esc="'{:.2f}'.format(line.quantity)"/>
                                </td>
                                <td style="text-align:center; font-size: 10px;">
                                    <span t-esc="line.product_uom_id.name"/>
                                </td>
                                <td style="text-align:center; font-size: 10px;">
-                                   <span t-esc="line.price_unit"/>
+                                    <span t-esc="'{:.2f}'.format(line.price_unit)"/>
                                </td>
                                <td style="text-align:center; font-size: 10px;">
                                    <span t-esc="line.l10n_ae_vat_amount"/>
