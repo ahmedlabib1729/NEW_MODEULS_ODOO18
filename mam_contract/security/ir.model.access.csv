@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+mam_contract.access_mam_contract,access_mam_contract,mam_contract.model_mam_contract,,1,1,1,1
+mam_contract.access_contract_batch,access_contract_batch,mam_contract.model_contract_batch,,1,1,1,1
+mam_contract.access_contract_batch_line,access_contract_batch_line,mam_contract.model_contract_batch_line,,1,1,1,1
+

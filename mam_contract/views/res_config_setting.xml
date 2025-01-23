@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="mam_res_config_settings_view_form" model="ir.ui.view">
+            <field name="name">mam_res_config_settings_view_form</field>
+            <field name="model">res.config.settings</field>
+            <field name="inherit_id" ref="account.res_config_settings_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//block[@id = 'analytic']" position="after">
+                    <block title="Default MAM contract Invoice">
+                        <setting>
+                            <field name="mam_contract_product_id"/>
+                        </setting>
+                        <setting>
+                            <field name="mam_contract_journal_id"/>
+                        </setting>
+                    </block>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>
