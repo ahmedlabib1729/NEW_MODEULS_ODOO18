@@ -1,4 +1,4 @@
-from odoo import fields, models, api
+from odoo import fields, models, api,_
 
 
 class ContractBatch(models.Model):
@@ -48,10 +48,14 @@ class ContractBatch(models.Model):
 
 
     def action_view_invoice(self):
-        action = self.env['ir.actions.act_window']._for_xml_id('account.action_move_out_invoice')
-        action['context'] = {'no_create':True}
-        action['domain'] = [('mam_batch_id', 'in', self.ids)]
-        return action
+        return {
+            'type': 'ir.actions.act_window',
+            'name': _('Invoices'),
+            'res_model': 'account.move',
+            'view_mode': 'list,form',
+            'domain': [('mam_batch_id', 'in', self.ids)],
+        }
+
 
 
 
