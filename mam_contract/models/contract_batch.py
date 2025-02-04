@@ -26,19 +26,24 @@ class ContractBatch(models.Model):
 
     def confirm(self):
         config_param_sudo = self.env["ir.config_parameter"].sudo()
-        product = int(config_param_sudo.get_param("mam_contract.mam_contract_product_id"))
+        # product = int(config_param_sudo.get_param("mam_contract.mam_contract_product_id"))
         journal = int(config_param_sudo.get_param("mam_contract.mam_contract_journal_id"))
         invoice = self.env['account.move'].create({
             'move_type': 'out_invoice',
             'partner_id': self.partner_id.id,
             'journal_id': journal,
             'mam_batch_id':self.id,
-            'invoice_line_ids': [(0, 0, {
-                'product_id': product,
-                'quantity': 1,
-                'price_unit': self.total,
-            })],
         })
+        for l in self.line_ids:
+            self.env['account.move.line'].create({
+                'move_id':invoice.id,
+                'name': l.employee_id.display_name,
+                'quantity': 1,
+                'price_unit': (l.days * l.day_rate) + (l.hours * l.hour_rate),
+                'display_type': 'product',
+                'hours': l.hours,
+                'days': l.days,
+            })
 
         self.state = 'posted'
 
