@@ -1,0 +1,119 @@
+<odoo>
+    <record id="action_payments" model="ir.actions.act_window">
+        <field name="name">Received Payments</field>
+        <field name="res_model">account.payment</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('delivery_operation_received_id', '=', active_id)]</field>
+    </record>
+    <record id="action_send_payments" model="ir.actions.act_window">
+        <field name="name">Send Payments</field>
+        <field name="res_model">account.payment</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('delivery_operation_send_id', '=', active_id)]</field>
+    </record>
+
+    <record id="view_delivery_operation_tree" model="ir.ui.view">
+        <field name="name">delivery.operation.tree</field>
+        <field name="model">delivery.operation</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="date"/>
+                <field name="customer_id"/>
+                <field name="status"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_delivery_operation_form" model="ir.ui.view">
+        <field name="name">delivery.operation.form</field>
+        <field name="model">delivery.operation</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_confirm" type="object" string="Confirm" class="btn-primary"
+                            groups="delivery_operation.confirm_delivery_operation_group"
+                            invisible="status != 'draft'"/>
+                    <button name="reset_to_draft" type="object" string="Reset To Draft"
+                            groups="delivery_operation.reset_to_draft_delivery_operation_group"
+                            invisible="status != 'confirm'"/>
+                    <button name="action_create_invoice" type="object" string="Create Invoice" class="oe_highlight"
+                            invisible="status != 'confirm' or is_invoice"/>
+                    <button name="action_receive_payment" type="object" string="Payment Received" class="oe_highlight"
+                            invisible="status != 'confirm' or total_collection == total_amount_received or not is_invoice"/>
+                    <button name="action_send_payment" type="object" string="Payment Send" class="oe_highlight"
+                            invisible="status != 'confirm' or total_amount_send == total_amount_received"/>
+                    <field name="status" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_invoice" type="object" string="invoice" invisible="not is_invoice"
+                                class="oe_stat_button" icon="fa-pencil-square-o">
+                        </button>
+                        <button name="%(delivery_operation.action_payments)d" type="action" string="Payments"
+                                class="oe_stat_button" icon="fa-money" invisible="received == 0">
+                            <field name="received" widget="statinfo"/>
+                        </button>
+                        <button name="%(delivery_operation.action_send_payments)d" type="action" string="Payments"
+                                class="oe_stat_button" icon="fa-money" invisible="send == 0">
+                            <field name="send" widget="statinfo"/>
+                        </button>
+                    </div>
+
+                    <group>
+                        <field name="name"/>
+                        <field name="date" readonly="status=='confirm'"/>
+                        <field name="customer_id" readonly="status=='confirm'"/>
+                        <field name="is_invoice" invisible="1"/>
+                        <!--                        <field name="status"/>-->
+                    </group>
+                    <notebook>
+                        <page string="Lines">
+                            <field name="line_ids" readonly="status=='confirm'">
+                                <list editable="bottom">
+                                    <field name="product_id"/>
+                                    <field name="invoice_number"/>
+                                    <field name="customer_id" domain="[('parent_id','=',parent.customer_id)]"/>
+                                    <field name="city_from"/>
+                                    <field name="city_to"/>
+                                    <field name="mobile_from"/>
+                                    <field name="mobile_to"/>
+                                    <field name="driver_id"/>
+                                    <field name="collection"/>
+                                    <field name="price"/>
+                                </list>
+                            </field>
+                            <group col="12">
+                                <group class="8"/>
+                                <group colspan="4">
+                                    <group class="oe_subtotal_footer">
+
+                                        <field name="total_price"/>
+                                        <field name="total_collection"/>
+                                        <field name="total_amount_received"/>
+                                        <field name="total_amount_send"/>
+                                    </group>
+                                </group>
+                            </group>
+
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_delivery_operation" model="ir.actions.act_window">
+        <field name="name">Delivery Operations</field>
+        <field name="res_model">delivery.operation</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+
+    <menuitem id="menu_delivery_operation_root" name="Delivery Operations" sequence="10"
+              web_icon="delivery_operation,static/description/icon.png"/>
+    <menuitem id="menu_delivery_operation" name="Delivery Orders" parent="menu_delivery_operation_root"
+              action="action_delivery_operation"/>
+
+</odoo>
