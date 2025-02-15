@@ -16,3 +16,4 @@ class DeliveryOperationLine(models.Model):
     driver_id = fields.Many2one('hr.employee', string='Driver')
     collection = fields.Float(string='Collection', required=True)
     price = fields.Float(string='Price', required=True)
+    status_id = fields.Many2one('delivery.status')

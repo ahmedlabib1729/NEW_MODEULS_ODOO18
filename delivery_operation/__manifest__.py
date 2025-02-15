@@ -10,6 +10,7 @@
         'views/delivery_operation_views.xml',
         'views/city.xml',
         'wizard/payment_wizard_view.xml',
+        'views/delivery_status.xml'
     ],
     'installable': True,
     'application': True,

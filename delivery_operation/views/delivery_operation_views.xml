@@ -81,6 +81,7 @@
                                     <field name="driver_id"/>
                                     <field name="collection"/>
                                     <field name="price"/>
+                                    <field name="status_id"/>
                                 </list>
                             </field>
                             <group col="12">
